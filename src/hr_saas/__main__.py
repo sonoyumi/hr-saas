@@ -1,13 +1,6 @@
-"""Точка входа: `python -m hr_saas` или команда `hr-saas`."""
+"""`python -m hr_saas` — the same as the `hr-saas` command."""
 
-
-def greet(name: str) -> str:
-    return f"Привет, {name}!"
-
-
-def main() -> None:
-    print(greet("мир"))
-
+from .cli import main
 
 if __name__ == "__main__":
     main()

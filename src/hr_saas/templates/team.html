@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Команда{% endblock %}
+{% block content %}
+<h1>Команда</h1>
+{% if err %}<p class="alert">{{ err }}</p>{% endif %}
+{% if password %}<p class="ok-box">Пользователь <b>{{ created }}</b> добавлен. Временный пароль: <code>{{ password }}</code> — передайте его лично и не храните в переписке. Он показан один раз.</p>{% endif %}
+<div class="cards two">
+  <div class="card">
+    <table class="mini">
+      <tr><th>Имя</th><th>E-mail</th><th>Роль</th><th></th></tr>
+      {% for u in users %}
+      <tr><td>{{ u['name'] }}</td><td>{{ u['email'] }}</td><td>{{ ROLE[u['role']] }}</td>
+        <td>{% if me['role'] == 'owner' and u['role'] != 'owner' %}<form method="post" action="/team/{{ u['id'] }}/remove" data-confirm="Отключить {{ u['name'] }}?"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="link">отключить</button></form>{% endif %}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% if me['role'] == 'owner' %}
+  <form method="post" action="/team/add" class="card">
+    <h3>Добавить рекрутера</h3>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Имя<input name="name" required></label>
+    <label>E-mail<input name="email" type="email" required></label>
+    <button class="primary">Добавить</button>
+  </form>
+  {% endif %}
+</div>
+{% endblock %}

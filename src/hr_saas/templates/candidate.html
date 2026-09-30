@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ c['name'] }}{% endblock %}
+{% block content %}
+<a href="/candidates" class="muted">← Кандидаты</a>
+<div class="ticket">
+  <section>
+    <div class="conv-head">
+      <h1>{{ c['name'] }}</h1>
+      {% if c['score'] is not none %}<span class="score big s{{ (c['score'] // 20)|int }}">{{ c['score']|round|int }} / 100</span>{% endif %}
+      <span class="st hr-{{ c['status'] }}">{{ STATUS[c['status']] }}</span>
+    </div>
+    <p class="muted">{{ c['vacancy'] }} · анкета заполнена {{ c['finished_at']|t }}{% if c['username'] %} · <a href="https://t.me/{{ c['username'] }}" rel="noopener noreferrer">@{{ c['username'] }}</a>{% endif %}</p>
+    {% for a in answers %}
+    <div class="card answer">
+      <div class="q"><span class="muted">{{ a['q_index'] + 1 }}.</span> {{ a['question'] }}</div>
+      <div class="a">{{ a['answer'] }}</div>
+      <div class="meta"><span class="pts">{{ a['points']|round(1) }} из {{ a['max_points']|int }}</span>{% if a['comment'] %} · {{ a['comment'] }}{% endif %}</div>
+    </div>
+    {% endfor %}
+  </section>
+  <aside class="side card">
+    <h3>Статус</h3>
+    <form method="post" action="/candidates/{{ c['id'] }}/status" class="status-buttons">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      {% for s in statuses %}<button name="status" value="{{ s }}" class="{{ 'primary' if c['status'] == s else 'secondary' }}">{{ STATUS[s] }}</button>{% endfor %}
+    </form>
+    <h3>Заметки команды</h3>
+    {% for n in notes %}<div class="note"><b>{{ n['author'] }}</b> <span class="muted">{{ n['created_at']|t }}</span><div>{{ n['text'] }}</div></div>{% endfor %}
+    <form method="post" action="/candidates/{{ c['id'] }}/note">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <textarea name="text" rows="3" placeholder="Созвон в пятницу, сильный в SQL…"></textarea>
+      <button class="secondary">Добавить заметку</button>
+    </form>
+  </aside>
+</div>
+{% endblock %}

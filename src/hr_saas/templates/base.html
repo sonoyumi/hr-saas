@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} · {{ platform }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/hr.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+{% if me %}
+<header class="top">
+  <a class="brand" href="/dashboard">🧑‍💼 {{ me['company'] }}</a>
+  <nav>
+    <a href="/dashboard" class="{{ 'on' if active == 'dashboard' }}">Обзор</a>
+    <a href="/vacancies" class="{{ 'on' if active == 'vacancies' }}">Вакансии</a>
+    <a href="/candidates" class="{{ 'on' if active == 'candidates' }}">Кандидаты</a>
+    <a href="/bot" class="{{ 'on' if active == 'bot' }}">Бот</a>
+    <a href="/team" class="{{ 'on' if active == 'team' }}">Команда</a>
+    <a href="/plan" class="{{ 'on' if active == 'plan' }}">Тариф <span class="plan-chip">{{ plan.title }}</span></a>
+  </nav>
+  <form method="post" action="/logout" class="who">
+    <span>{{ me['name'] }} · {{ ROLE[me['role']] }}</span>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <button class="link">Выйти</button>
+  </form>
+</header>
+{% endif %}
+<main class="{% block main_class %}{% endblock %}">
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

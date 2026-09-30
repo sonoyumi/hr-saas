@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Вакансии{% endblock %}
+{% block content %}
+<div class="bar"><h1>Вакансии</h1><a class="button primary" href="/vacancies/new">+ Новая вакансия</a></div>
+{% if rows %}
+<table class="list">
+  <thead><tr><th>Вакансия</th><th>Статус</th><th class="num">Вопросов</th><th class="num">Кандидатов</th><th class="num">Средний балл</th><th>Изменена</th></tr></thead>
+  <tbody>
+  {% for v in rows %}
+  <tr data-href="/vacancies/{{ v['id'] }}">
+    <td><a href="/vacancies/{{ v['id'] }}"><b>{{ v['title'] }}</b></a><br><span class="muted">{{ (v['description'] or '')[:90] }}</span></td>
+    <td>{% if v['active'] %}<span class="st st-closed">Активна</span>{% else %}<span class="st st-waiting">Выключена</span>{% endif %}</td>
+    <td class="num">{{ (v['questions']|fromjson)|length }}</td>
+    <td class="num"><a href="/candidates?vacancy={{ v['id'] }}">{{ v['candidates'] }}</a></td>
+    <td class="num">{{ v['avg_score']|int if v['avg_score'] is not none else '—' }}</td>
+    <td class="muted">{{ v['updated_at']|t }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="empty">Вакансий пока нет. <a href="/vacancies/new">Создайте первую</a> — это займёт пару минут.</div>
+{% endif %}
+{% endblock %}

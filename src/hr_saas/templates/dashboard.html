@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Обзор{% endblock %}
+{% block content %}
+<div class="bar"><h1>Обзор</h1><a class="button" href="/export.xlsx">⬇ Excel со всеми кандидатами</a></div>
+{% if not bot or not has_vacancy %}
+<div class="card steps">
+  <h3>Запуск за 3 шага</h3>
+  <p>{{ '✅' if bot else '1️⃣' }} <a href="/bot">Подключите Telegram-бота</a> — токен от @BotFather</p>
+  <p>{{ '✅' if has_vacancy else '2️⃣' }} <a href="/vacancies/new">Создайте вакансию</a> — вопросы пишутся простым текстом</p>
+  <p>3️⃣ Поставьте ссылку на бота в объявление о вакансии — кандидаты появятся здесь</p>
+</div>
+{% endif %}
+<div class="cards">
+  <div class="card kpi"><span>Новые анкеты</span><b>{{ d.by_status['new'] }}</b><em>ждут просмотра</em></div>
+  <div class="card kpi"><span>В шорт-листе</span><b>{{ d.by_status['shortlist'] }}</b></div>
+  <div class="card kpi"><span>За 7 дней</span><b>{{ d.week }}</b><em>заполненных анкет</em></div>
+  <div class="card kpi"><span>Сейчас заполняют</span><b>{{ d.by_status['in_progress'] }}</b></div>
+</div>
+<div class="cards two">
+  <div class="card">
+    <h3>Лучшие новые кандидаты</h3>
+    {% for c in d.top %}
+    <a class="row-link" href="/candidates/{{ c['id'] }}"><span class="score s{{ (c['score'] // 20)|int }}">{{ c['score']|round|int }}</span><b>{{ c['name'] }}</b><span class="muted">{{ c['vacancy'] }}</span></a>
+    {% else %}<p class="muted">Пока никого — поделитесь ссылкой на бота.</p>{% endfor %}
+  </div>
+  <div class="card">
+    <h3>Тариф {{ plan.title }}</h3>
+    {% for key, label in (('vacancies', 'Активные вакансии'), ('month', 'Анкет в этом месяце'), ('team', 'Пользователи')) %}
+    {% set used, limit = usage[key] %}
+    <div class="usage"><span>{{ label }}</span><b>{{ used }} / {{ limit if limit is not none else '∞' }}</b>
+      <progress max="100" value="{{ pct(limit, used) or 0 }}" class="{{ 'full' if limit and used >= limit }}"></progress></div>
+    {% endfor %}
+    <p class="muted">Бот: {% if bot %}<b>@{{ bot['username'] }}</b>{% else %}не подключён{% endif %}</p>
+  </div>
+</div>
+{% endblock %}

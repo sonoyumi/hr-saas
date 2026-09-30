@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Кандидаты{% endblock %}
+{% block content %}
+<form class="bar filters" method="get" action="/candidates">
+  <h1>Кандидаты</h1>
+  <select name="vacancy"><option value="0">Все вакансии</option>
+    {% for v in vacancies %}<option value="{{ v['id'] }}" {{ 'selected' if f.vacancy == v['id'] }}>{{ v['title'] }}</option>{% endfor %}</select>
+  <select name="status"><option value="">Все статусы</option>
+    {% for s in statuses %}<option value="{{ s }}" {{ 'selected' if f.status == s }}>{{ STATUS[s] }}</option>{% endfor %}</select>
+  <input name="q" value="{{ f.q }}" placeholder="Имя или слово из ответа">
+  <button>Показать</button>
+  <a class="button" href="/export.xlsx{{ '?vacancy=%d' % f.vacancy if f.vacancy }}">⬇ Excel</a>
+</form>
+{% if rows %}
+<table class="list">
+  <thead><tr><th class="num">Балл</th><th>Кандидат</th><th>Вакансия</th><th>Статус</th><th>Анкета</th></tr></thead>
+  <tbody>
+  {% for c in rows %}
+  <tr data-href="/candidates/{{ c['id'] }}">
+    <td class="num">{% if c['score'] is not none %}<span class="score s{{ (c['score'] // 20)|int }}">{{ c['score']|round|int }}</span>{% else %}—{% endif %}</td>
+    <td><a href="/candidates/{{ c['id'] }}"><b>{{ c['name'] }}</b></a>{% if c['username'] %}<br><span class="muted">@{{ c['username'] }}</span>{% endif %}</td>
+    <td>{{ c['vacancy'] }}</td>
+    <td><span class="st hr-{{ c['status'] }}">{{ STATUS[c['status']] }}</span></td>
+    <td class="muted">{{ c['finished_at']|t }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<div class="empty">Никого не нашлось.</div>{% endif %}
+{% endblock %}

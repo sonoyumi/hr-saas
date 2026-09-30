@@ -1,0 +1,40 @@
+/* HR cabinet additions on top of style.css */
+a.button { display: inline-block; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+a.button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.plan-chip { font-size: 11.5px; background: var(--accent-soft); color: var(--accent); padding: 1px 7px; border-radius: 999px; margin-left: 4px; font-weight: 600; }
+.cards.three { grid-template-columns: repeat(3, 1fr); }
+.steps p { margin: 6px 0; }
+.ok-box { background: var(--ok-soft); color: var(--ok); padding: 9px 12px; border-radius: 8px; margin: 8px 0; }
+.score { display: inline-block; min-width: 38px; text-align: center; font-weight: 700; border-radius: 8px; padding: 2px 8px; }
+.score.s0, .score.s1 { background: var(--bad-soft); color: var(--bad); }
+.score.s2 { background: var(--warn-soft); color: var(--warn); }
+.score.s3 { background: #eef6e6; color: #4d7c0f; }
+.score.s4, .score.s5 { background: var(--ok-soft); color: var(--ok); }
+.score.big { font-size: 18px; padding: 4px 12px; }
+.hr-new { background: var(--accent-soft); color: var(--accent); }
+.hr-shortlist { background: var(--ok-soft); color: var(--ok); }
+.hr-rejected { background: #eef1f5; color: var(--muted); }
+.hr-hired { background: #efe7ff; color: #6d28d9; }
+.row-link { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--ink); }
+.usage { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; margin: 10px 0; }
+.usage progress { grid-column: 1 / -1; width: 100%; height: 8px; accent-color: var(--accent); }
+.usage progress.full { accent-color: var(--bad); }
+.filters { justify-content: flex-start; }
+.filters h1 { margin-right: 12px; }
+.dsl { margin-top: 14px; }
+.dsl textarea { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 14px; line-height: 1.5; }
+.help p { margin: 6px 0; }
+.vacancy-form .card { display: flex; flex-direction: column; gap: 10px; }
+.answer { margin: 10px 0; }
+.answer .q { font-weight: 600; }
+.answer .a { white-space: pre-wrap; margin: 6px 0; }
+.answer .meta { font-size: 13px; color: var(--muted); }
+.answer .pts { font-weight: 600; color: var(--ink); }
+.status-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+.note { border-bottom: 1px solid var(--line); padding: 6px 0; font-size: 14px; }
+.side textarea { margin: 8px 0; }
+.tariff ul { padding-left: 18px; }
+.tariff.current { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.price { font-size: 26px; font-weight: 700; margin: 4px 0 8px; }
+.big-line { font-size: 20px; }
+@media (max-width: 900px) { .cards.three { grid-template-columns: 1fr; } }

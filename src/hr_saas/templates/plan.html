@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Тариф{% endblock %}
+{% block content %}
+<h1>Тарифы</h1>
+<div class="cards three">
+  {% for code, p in PLANS.items() %}
+  <div class="card tariff {{ 'current' if p.code == plan.code }}">
+    <h3>{{ p.title }}{% if p.code == plan.code %} · ваш тариф{% endif %}</h3>
+    <p class="price">{{ p.price_eur }} € <span class="muted">/ месяц</span></p>
+    <ul>
+      <li>Активных вакансий: <b>{{ p.vacancies if p.vacancies is not none else 'без ограничений' }}</b></li>
+      <li>Анкет в месяц: <b>{{ p.candidates_month if p.candidates_month is not none else 'без ограничений' }}</b></li>
+      <li>Пользователей: <b>{{ p.recruiters if p.recruiters is not none else 'без ограничений' }}</b></li>
+      <li>ИИ-оценка открытых ответов: <b>{{ 'да' if p.ai else 'нет (ключевые слова)' }}</b></li>
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+<p class="muted">Сменить тариф — напишите администратору платформы. Когда лимит анкет за месяц исчерпан, бот вежливо сообщает кандидатам, что приём временно приостановлен.</p>
+{% endblock %}

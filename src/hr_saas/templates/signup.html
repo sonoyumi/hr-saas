@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Регистрация{% endblock %}
+{% block main_class %}center{% endblock %}
+{% block content %}
+<form method="post" action="/signup" class="card login">
+  <h1>Новая компания</h1>
+  <p class="muted">Тариф Free: 1 вакансия, 30 анкет в месяц. Сменить можно в любой момент.</p>
+  {% for e in err %}<p class="alert">{{ e }}</p>{% endfor %}
+  <label>Название компании<input name="company" value="{{ form.company }}" required></label>
+  <label>Короткий адрес (латиница, цифры, дефис)<input name="slug" value="{{ form.slug }}" pattern="[a-z0-9][a-z0-9-]{1,38}[a-z0-9]" required></label>
+  <label>Ваше имя<input name="name" value="{{ form.name }}" required></label>
+  <label>E-mail<input name="email" type="email" value="{{ form.email }}" autocomplete="username" required></label>
+  <label>Пароль (от 10 символов)<input name="password" type="password" minlength="10" autocomplete="new-password" required></label>
+  <button class="primary">Создать кабинет</button>
+  <p class="muted">Уже есть кабинет? <a href="/login">Войти</a></p>
+</form>
+{% endblock %}

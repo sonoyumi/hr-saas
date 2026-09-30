@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ v['title'] or 'Новая вакансия' }}{% endblock %}
+{% block content %}
+<a href="/vacancies" class="muted">← Вакансии</a>
+<h1>{{ v['title'] or 'Новая вакансия' }}</h1>
+{% for e in err %}<p class="alert">{{ e }}</p>{% endfor %}
+{% if request.query_params.get('saved') %}<p class="ok-box">Сохранено. Кандидаты уже видят новую версию анкеты.</p>{% endif %}
+<form method="post" action="/vacancies/save" class="vacancy-form">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <input type="hidden" name="id" value="{{ v['id'] }}">
+  <div class="cards two">
+    <div class="card">
+      <label>Название<input name="title" value="{{ v['title'] }}" maxlength="120" required></label>
+      <label>Описание (кандидат увидит его перед вопросами)<textarea name="description" rows="4" maxlength="1000">{{ v['description'] }}</textarea></label>
+      <label class="check"><input type="checkbox" name="active" value="1" {{ 'checked' if v['active'] }}> вакансия активна — видна в боте</label>
+      <button class="primary">Сохранить</button>
+    </div>
+    <div class="card help">
+      <h3>Как писать вопросы</h3>
+      <p><code>? Вопрос</code> — вопрос с кнопками, под ним варианты:</p>
+      <p><code>- Вариант | 2</code> — вариант и баллы за него (0–10)</p>
+      <p><code>?? Вопрос | python, api</code> — открытый вопрос; после «|» — ключевые слова хорошего ответа. Ответ оценивается по ним, а на тарифах Pro и Business — ещё и ИИ.</p>
+      <p class="muted">Итоговый балл кандидата — 0–100: сколько он набрал из максимума.</p>
+    </div>
+  </div>
+  <label class="dsl">Анкета<textarea name="source" rows="16" spellcheck="false">{{ source }}</textarea></label>
+</form>
+{% endblock %}

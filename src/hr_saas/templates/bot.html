@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Бот{% endblock %}
+{% block content %}
+<h1>Telegram-бот компании</h1>
+{% if err %}<p class="alert">{{ err }}</p>{% endif %}
+{% if ok %}<p class="ok-box">{{ ok }}</p>{% endif %}
+<div class="cards two">
+  <div class="card">
+    {% if bot %}
+    <h3>Подключён</h3>
+    <p class="big-line">🤖 <a href="https://t.me/{{ bot['username'] }}" rel="noopener noreferrer">@{{ bot['username'] }}</a></p>
+    <p class="muted">С {{ bot['connected_at']|t }}. Ссылку <code>t.me/{{ bot['username'] }}</code> ставьте в объявления о вакансиях.</p>
+    {% if me['role'] == 'owner' %}
+    <form method="post" action="/bot/disconnect" data-confirm="Отключить бота? Кандидаты перестанут получать ответы.">
+      <input type="hidden" name="csrf" value="{{ csrf }}"><button class="secondary">Отключить</button>
+    </form>
+    {% endif %}
+    {% else %}
+    <h3>Подключить</h3>
+    {% if me['role'] == 'owner' %}
+    <form method="post" action="/bot/connect">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <label>Токен от @BotFather<input name="token" placeholder="123456789:AA…" autocomplete="off" required></label>
+      <button class="primary">Подключить</button>
+    </form>
+    {% else %}<p class="muted">Подключает владелец кабинета.</p>{% endif %}
+    {% endif %}
+    {% if not https %}<p class="muted">⚠️ Сервер работает без HTTPS: Telegram не присылает вебхуки на http. Для проверки на своём компьютере — <code>hr-saas polling {{ me['slug'] }}</code>.</p>{% endif %}
+  </div>
+  <div class="card help">
+    <h3>Как получить токен</h3>
+    <p>1. В Telegram откройте <b>@BotFather</b> → <code>/newbot</code>.</p>
+    <p>2. Придумайте имя (например, «Assunzioni Casa Luce») и адрес, оканчивающийся на <code>bot</code>.</p>
+    <p>3. Скопируйте токен сюда. Он хранится <b>в зашифрованном виде</b> и больше нигде не показывается.</p>
+  </div>
+</div>
+{% endblock %}
