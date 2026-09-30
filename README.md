@@ -121,6 +121,7 @@ src/hr_saas/
 
 [![Telegram](https://img.shields.io/badge/Telegram-write%20me-2CA5E0?logo=telegram&logoColor=white)](https://t.me/sonoyumiii)
 [![Email](https://img.shields.io/badge/Email-contact-EA4335?logo=gmail&logoColor=white)](mailto:sonoyumiii@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-profile-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vladyslav-shokun/)
 
 > 💼 Need a screening bot for your agency, or a SaaS of your own? Get in touch.
 
@@ -193,6 +194,7 @@ src/hr_saas/
 
 [![Telegram](https://img.shields.io/badge/Telegram-scrivimi-2CA5E0?logo=telegram&logoColor=white)](https://t.me/sonoyumiii)
 [![Email](https://img.shields.io/badge/Email-contatto-EA4335?logo=gmail&logoColor=white)](mailto:sonoyumiii@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-profilo-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vladyslav-shokun/)
 
 > 💼 Vi serve un bot di preselezione per la vostra agenzia o un vostro SaaS? Scrivetemi.
 
@@ -260,6 +262,7 @@ src/hr_saas/
 
 [![Telegram](https://img.shields.io/badge/Telegram-написати-2CA5E0?logo=telegram&logoColor=white)](https://t.me/sonoyumiii)
 [![Email](https://img.shields.io/badge/Email-контакт-EA4335?logo=gmail&logoColor=white)](mailto:sonoyumiii@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-профіль-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vladyslav-shokun/)
 
 > 💼 Потрібен бот відбору для агенції чи власний SaaS? Напишіть мені.
 
@@ -345,6 +348,7 @@ src/hr_saas/
 
 [![Telegram](https://img.shields.io/badge/Telegram-написать-2CA5E0?logo=telegram&logoColor=white)](https://t.me/sonoyumiii)
 [![Email](https://img.shields.io/badge/Email-контакт-EA4335?logo=gmail&logoColor=white)](mailto:sonoyumiii@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-профиль-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vladyslav-shokun/)
 
 > 💼 Нужен бот отбора для агентства или собственный SaaS? Напишите мне.
 
